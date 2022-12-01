@@ -1,0 +1,44 @@
+<<<<<<< HEAD
+ variables:
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+ 
+ before_script:
+ - apt-get update -qy
+ - apt-get install -y ruby-dev
+ - gem install dpl
+ 
+ sonarcloud-check:
+  image: maven:3.6.3-jdk-11
+=======
+variables:
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
+  GIT_DEPTH: "0" # Tells git to fetch all the branches of the project, required by the analysis task
+sonarcloud-check:
+  image: maven:3-openjdk-17 # Or newer
+>>>>>>> 8abded4 (Projeto Hello World)
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+<<<<<<< HEAD
+    - mvn verify sonar:sonar
+=======
+    - mvn verify sonar:sonar -Dsonar.projectKey=WhoisAndreoli_hello
+>>>>>>> 8abded4 (Projeto Hello World)
+  only:
+    - merge_requests
+    - master
+    - develop
+<<<<<<< HEAD
+ 
+ deploy:
+  image: ruby:latest
+  script:
+   - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+  only:
+   - main
+=======
+    - push
+>>>>>>> 8abded4 (Projeto Hello World)
